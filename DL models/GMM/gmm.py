@@ -17,7 +17,6 @@ def debug(*args, **kwargs):
         print(*args, **kwargs)
 
 
-
 # 第 k 个模型的高斯分布密度函数
 # 每 i 行表示第 i 个样本在各模型中的出现概率
 # 返回一维列表
@@ -25,7 +24,6 @@ def debug(*args, **kwargs):
 def phi(Y, mu_k, cov_k):
     norm = multivariate_normal(mean=mu_k, cov=cov_k)
     return norm.pdf(Y)
-
 
 
 # E 步：计算每个模型对样本的响应度
@@ -61,7 +59,6 @@ def getExpectation(Y, mu, cov, alpha):
     return gamma
 
 
-
 # M 步：迭代模型参数
 # Y 为样本矩阵，gamma 为响应度矩阵
 
@@ -71,7 +68,7 @@ def maximize(Y, gamma):
     # 模型数
     K = gamma.shape[1]
 
-    #初始化参数值
+    # 初始化参数值
     mu = np.zeros((K, D))
     cov = []
     alpha = np.zeros(K)
@@ -92,7 +89,6 @@ def maximize(Y, gamma):
     return mu, cov, alpha
 
 
-
 # 数据预处理
 # 将所有数据都缩放到 0 和 1 之间
 
@@ -104,7 +100,6 @@ def scale_data(Y):
         Y[:, i] = (Y[:, i] - min_) / (max_ - min_)
     debug("Data scaled.")
     return Y
-
 
 
 # 初始化模型参数
